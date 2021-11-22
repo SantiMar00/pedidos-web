@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const URL = 'mongodb+srv://user:1234567890@cluster0.bseox.mongodb.net/pedidos'
+const URL = process.env.MONGO_URL ?? 'mongodb+srv://user:1234567890@cluster0.bseox.mongodb.net/pedidos'
 
 mongoose
     .connect(URL, { useNewUrlParser: true })
