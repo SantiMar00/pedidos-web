@@ -1,0 +1,31 @@
+.mainwrapper {
+    height: 100%;
+    background-color: rgb(139, 215, 193);
+    box-sizing: border-box;
+}
+
+.navbar {
+    color: white;
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.banner-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url('./shopping-bag.jpg');
+    height: 91vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    margin: 0 -12px 0 -12px;
+}
+
+.banner-text {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+}

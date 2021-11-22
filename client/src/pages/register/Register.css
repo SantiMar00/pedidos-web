@@ -1,0 +1,34 @@
+.mainwrapper {
+    background-color: rgb(139, 215, 193);
+    height: 100vh;
+}
+
+.title {
+    text-align: center;
+    margin-top: 1vh;
+    margin-bottom: 4vh;
+}
+
+.signup {
+    display: block;
+    width: 100%;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    margin-top: 2em;
+}
+
+.form {
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    width: 20em;
+    padding: 1em;
+    border-radius: 10px;
+    margin-top: 20vh;
+    margin-bottom: 25vh;
+    box-sizing: border-box;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    position: relative;
+}

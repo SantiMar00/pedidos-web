@@ -1,0 +1,37 @@
+import React from 'react'
+import '../landing/Landing.css'
+
+function Landing() {
+    return (
+        <div className="container-fluid mainwrapper">
+            <nav className="navbar navbar-dark bg-dark">
+                <div className="container-fluid">
+                    <a className="navbar-brand" href="/">
+                        Pedidos Web
+                    </a>
+                    <div className="row">
+                        <div className="col">
+                            <a
+                                className="btn btn-outline-primary"
+                                href="/login"
+                            >
+                                Login
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            <div className="banner-image">
+                <div className="banner-text">
+                    <h1>Landing Page</h1>
+                    <p>Esta es una landing page</p>
+                    <a className="btn btn-primary" href="/register">
+                        Comenzar
+                    </a>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default Landing
