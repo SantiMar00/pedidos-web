@@ -29,3 +29,11 @@
     transform: translate(-50%, -50%);
     color: white;
 }
+
+.login {
+    margin: 5px;
+}
+
+.register {
+    margin: 5px;
+}

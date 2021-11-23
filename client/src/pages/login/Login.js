@@ -83,7 +83,7 @@ function Login() {
                     className="btn btn-primary signup"
                     onClick={login}
                 >
-                    Log In
+                    Iniciar Sesión
                 </button>
             </div>
         </div>
