@@ -45,46 +45,48 @@ function Register() {
                     </a>
                 </div>
             </nav>
-            <div className="container-fluid form">
-                <div className="title">
-                    <h3>Crear nuevo usuario</h3>
+            <div className="row">
+                <div className="container-fluid form">
+                    <div className="title">
+                        <h3>Crear nuevo usuario</h3>
+                    </div>
+                    <label htmlFor="user" className="form-label">
+                        Usuario
+                    </label>
+                    <input
+                        type="username"
+                        className="form-control username"
+                        id="user"
+                        placeholder="Usuario"
+                        onChange={(e) => {
+                            setUsername(e.target.value)
+                        }}
+                    ></input>
+                    <div>{userError}</div>
+                    <label htmlFor="pass" className="form-label">
+                        Contraseña
+                    </label>
+                    <input
+                        type="password"
+                        className="form-control password"
+                        id="pass"
+                        placeholder="Contraseña"
+                        onChange={(e) => {
+                            setPassword(e.target.value)
+                        }}
+                    ></input>
+                    <div>{passError}</div>
+                    <div className="link">
+                        <a href="/login">¿Ya tenés una cuenta?</a>
+                    </div>
+                    <button
+                        type="button"
+                        className="btn btn-primary signup"
+                        onClick={register}
+                    >
+                        Registrarse
+                    </button>
                 </div>
-                <label htmlFor="user" className="form-label">
-                    Usuario
-                </label>
-                <input
-                    type="username"
-                    className="form-control username"
-                    id="user"
-                    placeholder="Usuario"
-                    onChange={(e) => {
-                        setUsername(e.target.value)
-                    }}
-                ></input>
-                <div>{userError}</div>
-                <label htmlFor="pass" className="form-label">
-                    Contraseña
-                </label>
-                <input
-                    type="password"
-                    className="form-control password"
-                    id="pass"
-                    placeholder="Contraseña"
-                    onChange={(e) => {
-                        setPassword(e.target.value)
-                    }}
-                ></input>
-                <div>{passError}</div>
-                <div className="link">
-                    <a href="/login">¿Ya tenés una cuenta?</a>
-                </div>
-                <button
-                    type="button"
-                    className="btn btn-primary signup"
-                    onClick={register}
-                >
-                    Registrarse
-                </button>
             </div>
         </div>
     )

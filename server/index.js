@@ -25,12 +25,17 @@ const login = require('./src/routes/login')
 app.use('/login', login)
 
 const product = require('./src/routes/product')
+
+app.use('/products', product)
+
+app.get('/', (req, res) => {})
+
 app.use('/product', product)
 
 const cart = require('./src/routes/cart')
 app.use('/cart', cart)
 
-app.get('/', (req, res) => { })
+app.get('/', (req, res) => {})
 
 // Server run -------------------------------------------------------------------------------------
 app.listen(port, () => {
