@@ -75,6 +75,9 @@ function Register() {
                     }}
                 ></input>
                 <div>{passError}</div>
+                <div className="link">
+                    <a href="/login">¿Ya tenés una cuenta?</a>
+                </div>
                 <button
                     type="button"
                     className="btn btn-primary signup"
