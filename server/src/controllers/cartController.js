@@ -135,6 +135,36 @@ exports.insertProduct = async (req, res) => {
     }
 }
 
+exports.deleteProduct = async (req, res) => {
+    try {
+        const cartProd = await CartProduct.findOne({
+            where: {
+                cartId: req.params.id,
+                productId: req.body.productId,
+            }
+        })
+
+        if (!cartProd) {
+            return res.status(400).json({ message: 'Este producto no existe en el carrito' });
+        } else {
+            if (cartProd.amount > 1) {
+                await cartProd.update({
+                    amount: cartProd.amount - 1
+                })
+            } else {
+                await cartProd.destroy()
+            }
+        }
+
+        const cart = await findById(req.params.id)
+
+        return res.json({
+            cart
+        })
+    } catch (err) {
+        return res.status(400).json({ message: err.message });
+    }
+}
 
 exports.findById = async (req, res) => {
     try {
