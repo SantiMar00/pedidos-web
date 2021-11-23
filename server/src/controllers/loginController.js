@@ -1,8 +1,10 @@
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 const User = require('../models').user;
+const secret = process.env.JWT_SECRET;
 
 const verifyJWT = token => jwt.verify(token, secret);
+const generateJWT = (payload) => jwt.sign(payload, secret);
 
 exports.login = async (req, res) => {
     const inputUser = req.body.username
@@ -13,37 +15,46 @@ exports.login = async (req, res) => {
             message: 'Debe de ingresar un email y password para ingresar',
         });
 
-    let findUser = null;
+    let userFound = null;
     try {
-        findUser = await User.findOne({ where: { username: inputUser } })
+        userFound = await User.findOne({ where: { username: inputUser } })
     } catch (e) {
         return res.status(400).json({ message: e.message });
     }
 
-    if (!findUser) {
+    if (!userFound) {
         return res.status(400).json({
             message: 'Usuario no encontrado',
         });
     }
 
     try {
-        if (!bcrypt.compareSync(inputPass, findUser.password))
+        if (!bcrypt.compareSync(inputPass, userFound.password))
             return res.status(400).json({
                 message: 'password incorrecto',
             });
 
-        const token = jwt.sign(
-            { id: findUser.id },
-            process.env.JWT_SECRET,
-            { expiresIn: process.env.JWT_EXPIRE_TIME }
-        )
-
         return res.json({
-            token: token,
+            token: generateJWT({ id: userFound.id })
         })
     } catch (err) {
-        return res.status(400).json({ message: e.message });
+        return res.status(400).json({ message: err.message });
     }
 }
 
-exports.isAuth = async (req, res, next) => { }
+exports.isAuth = async (req, res, next) => {
+    try {
+        const { authorization } = req.headers;
+        if (!authorization) {
+            throw Error('Unauthorized');
+        }
+        const decoded = verifyJWT(authorization.split(' ')[1]);
+        req.user = await User.findByPk(decoded.id);
+        if (!req.user) {
+            throw Error('Unauthorized');
+        }
+        next();
+    } catch (error) {
+        return res.status(401).send({ message: error.message });
+    }
+};

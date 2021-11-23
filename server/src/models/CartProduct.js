@@ -11,18 +11,18 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       CartProduct.belongsTo(models.cart, {
         as: 'cart',
-        foreignKey: 'cart_id',
+        foreignKey: 'cartId',
       })
       CartProduct.belongsTo(models.product, {
         as: 'product',
-        foreignKey: 'product_id',
+        foreignKey: 'productId',
       })
     }
   };
   CartProduct.init({
-    cart_id: DataTypes.INTEGER,
-    product_id: DataTypes.INTEGER,
-    close: DataTypes.BOOLEAN
+    cartId: DataTypes.INTEGER,
+    productId: DataTypes.INTEGER,
+    amount: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'cartProduct',

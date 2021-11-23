@@ -1,6 +1,12 @@
 const express = require('express')
 const cors = require('cors')
 const mongoPool = require('./src/config/pool')
+const loginController = require('./src/controllers/loginController')
+const register = require('./src/routes/register')
+const login = require('./src/routes/login')
+const product = require('./src/routes/product')
+const cart = require('./src/routes/cart')
+
 require('dotenv').config()
 
 const app = express()
@@ -12,25 +18,27 @@ app.use(express.urlencoded({ extended: true }))
 app.use(
     cors({
         origin: '*',
-        methods: ['GET', 'POST'],
+        methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'],
         credential: true,
     })
 )
 
 // Rutas -----------------------------------------------------------------------------------------
-const register = require('./src/routes/register')
 app.use('/register', register)
 
-const login = require('./src/routes/login')
 app.use('/login', login)
 
-const product = require('./src/routes/product')
+app.use(loginController.isAuth)
+
+app.get('/user', loginController.isAuth, (req, res) => res.json(req.user))
+
 app.use('/product', product)
 
-const cart = require('./src/routes/cart')
 app.use('/cart', cart)
 
-app.get('/', (req, res) => { })
+app.get('/', (req, res) => {
+    return res.status(200).json({ status: 'Server running!' });
+})
 
 // Server run -------------------------------------------------------------------------------------
 app.listen(port, () => {

@@ -8,7 +8,7 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      cart_id: {
+      cartId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
@@ -16,13 +16,17 @@ module.exports = {
           key: 'id'
         },
       },
-      product_id: {
+      productId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
           model: 'products',
           key: 'id'
         },
+      },
+      amount: {
+        type: Sequelize.INTEGER,
+        defaultValue: 1
       },
       createdAt: {
         allowNull: false,
@@ -35,6 +39,6 @@ module.exports = {
     });
   },
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable('cartProducts');
+    await queryInterface.dropTable('cartproducts');
   }
 };
