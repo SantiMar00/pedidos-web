@@ -2,51 +2,7 @@ const Cart = require('../models').cart;
 const CartProduct = require('../models').cartProduct;
 const Product = require('../models').product;
 const User = require('../models').user;
-
-const findById = async (id) => {
-    let cart = await Cart.findByPk(id, {
-        include: [{
-            model: User,
-            as: 'user'
-        },
-            // {
-            //     model: Product,
-            //     as: 'product'
-            // }
-        ]
-    });
-
-    const cartProduct = await CartProduct.findAll({
-        where: {
-            cartId: cart.id
-        },
-        include: [
-            {
-                model: Product,
-                as: 'product'
-            }
-        ]
-    })
-    // console.log(cartProduct);
-
-    // const prodsIds = []
-    // for (const cp of cartProduct) {
-    //     prodsIds.push(cp.productId)
-    // }
-
-    // const prods = await Product.findAll({
-    //     where: {
-    //         id: prodsIds
-    //     }
-    // })
-
-    // cart.product = prods
-
-    return {
-        ...cart.dataValues,
-        cartProducts: cartProduct
-    }
-}
+const CartService = require('../services/cart.service');
 
 exports.create = async (req, res) => {
     try {
@@ -125,7 +81,7 @@ exports.insertProduct = async (req, res) => {
                 amount: cartProd.amount + 1
             })
 
-        const cart = await findById(req.body.cartId)
+        const cart = await CartService.findById(req.body.cartId)
 
         return res.json({
             cart
@@ -156,7 +112,7 @@ exports.deleteProduct = async (req, res) => {
             }
         }
 
-        const cart = await findById(req.params.id)
+        const cart = await CartService.findById(req.params.id)
 
         return res.json({
             cart
@@ -169,7 +125,7 @@ exports.deleteProduct = async (req, res) => {
 exports.findById = async (req, res) => {
     try {
         return res.json({
-            cart: await findById(req.params.id)
+            cart: await CartService.findById(req.params.id)
         })
     } catch (err) {
         return res.status(400).json({ message: err.message });

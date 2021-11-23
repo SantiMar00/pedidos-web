@@ -4,6 +4,10 @@ const User = require('../models').user;
 const register = async (req, res) => {
     const username = req.body.username
     const password = req.body.password
+    const firstname = req.body.firstname
+    const lastname = req.body.lastname
+    const address = req.body.address
+    const ivaCondition = req.body.ivaCondition
 
     if (!username || !password)
         return res.status(400).json({
@@ -26,9 +30,12 @@ const register = async (req, res) => {
     } catch (error) {
         return res.status(400).json({ message: error.message });
     }
-
     const user = new User({
         username: username,
+        firstname: firstname,
+        lastname: lastname,
+        address: address,
+        ivaCondition: ivaCondition,
         password: hash,
     })
 

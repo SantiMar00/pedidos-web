@@ -6,6 +6,7 @@ const register = require('./src/routes/register')
 const login = require('./src/routes/login')
 const product = require('./src/routes/product')
 const cart = require('./src/routes/cart')
+const invoice = require('./src/routes/invoice')
 
 require('dotenv').config()
 
@@ -28,6 +29,7 @@ app.use('/register', register)
 
 app.use('/login', login)
 
+// ## FROM HERE, ALL ENDPOINTS ARE PRIVATED ##
 app.use(loginController.isAuth)
 
 app.get('/user', loginController.isAuth, (req, res) => res.json(req.user))
@@ -35,6 +37,8 @@ app.get('/user', loginController.isAuth, (req, res) => res.json(req.user))
 app.use('/product', product)
 
 app.use('/cart', cart)
+
+app.use('/invoice', invoice)
 
 app.get('/', (req, res) => {
     return res.status(200).json({ status: 'Server running!' });
