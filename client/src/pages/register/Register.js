@@ -1,6 +1,5 @@
 import { React, useState } from 'react'
 import '../register/Register.css'
-import Axios from 'axios'
 import { useHistory } from 'react-router-dom'
 import AuthService from '../../services/auth.service'
 

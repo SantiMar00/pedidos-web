@@ -4,18 +4,18 @@ import Axios from 'axios'
 import ListaProductos from '../../components/ListaProductos'
 import AuthService from '../../services/auth.service'
 import './Home.css'
+import authHeader from '../../services/auth-header'
 
 function Home() {
     let history = useHistory()
 
-    const [currentUser, setCurrentUser] = useState(AuthService.getCurrentUser())
-
     const [products, setProducts] = useState([])
 
     useEffect(() => {
-        Axios.get('/products/')
+        Axios.get('/product/', {
+            headers: authHeader(),
+        })
             .then((res) => {
-                console.log(res)
                 setProducts(res.data.products)
             })
             .catch((err) => {
@@ -29,7 +29,6 @@ function Home() {
 
     const logout = () => {
         AuthService.logout()
-        setCurrentUser()
         history.push('/')
     }
 
@@ -39,6 +38,9 @@ function Home() {
                 <div className="container-fluid">
                     <a className="navbar-brand" href="/">
                         Pedidos Web
+                    </a>
+                    <a className="btn btn-primary register" href="/dashboard">
+                        dashboard
                     </a>
                     <button
                         type="button"
@@ -50,7 +52,6 @@ function Home() {
                 </div>
             </nav>
             <div className="container-fluid productos">{productList}</div>
-            {/* <h1>Bienvenido {currentUser.username}</h1> */}
         </div>
     )
 }

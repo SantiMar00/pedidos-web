@@ -7,11 +7,10 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
 
     let user = AuthService.getCurrentUser()
 
-    /*
     if (!user) {
         isAuth = false
     }
-*/
+
     return (
         <Route
             {...rest}

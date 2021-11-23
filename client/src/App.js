@@ -4,6 +4,7 @@ import Landing from './pages/landing/Landing'
 import Register from './pages/register/Register'
 import Login from './pages/login/Login'
 import Home from './pages/home/Home'
+import Dashboard from './pages/dashboard/Dashboard'
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Login />
                 </Route>
                 <ProtectedRoute exact path="/home" component={Home} />
+                <ProtectedRoute exact path="/dashboard" component={Dashboard} />
             </Switch>
         </Router>
     )
